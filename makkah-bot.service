@@ -1,0 +1,15 @@
+[Unit]
+Description=Makkah Islamic Bot 24/7 Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/makkah-islamic-bot
+ExecStart=/opt/makkah-islamic-bot/venv/bin/python main.py
+Restart=always
+RestartSec=10
+EnvironmentFile=/opt/makkah-islamic-bot/.env
+
+[Install]
+WantedBy=multi-user.target

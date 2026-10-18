@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  makkah-islamic-bot:
+    build: .
+    container_name: makkah_islamic_bot
+    restart: always
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - CHANNEL_ID=${CHANNEL_ID}
+      - CHANNEL_LINK=${CHANNEL_LINK}
+      - ADMIN_IDS=${ADMIN_IDS}
+      - TIMEZONE=Asia/Riyadh
+      - QURAN_PAGES_PER_DAY=2
+      - PORT=8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
